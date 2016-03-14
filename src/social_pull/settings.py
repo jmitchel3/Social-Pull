@@ -47,6 +47,10 @@ INSTALLED_APPS = [
 
 SITE_ID = 1
 
+GOOGLE_CLIENT_ID = "225282929958-j44ak69m280evc3qkjjnmefvn483fs20.apps.googleusercontent.com"
+GOOGLE_CLIENT_SECRET = "evR5rrwJjmypTZMovTUTAfBe"
+
+
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
