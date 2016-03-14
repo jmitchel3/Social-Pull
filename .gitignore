@@ -1,3 +1,4 @@
+*.py[cod]
 .Python
 bin/
 include/
