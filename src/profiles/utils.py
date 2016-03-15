@@ -1,3 +1,5 @@
+from pprint import pprint
+
 import json
 
 import requests
@@ -25,5 +27,8 @@ def get_youtube_subscriptions(access_token, max_results=50):
             item['snippet']['title']
             for item in response_as_dict['items']
         ]
+    else:
+        response_as_dict = json.loads(response.content)
+        pprint(response_as_dict)
 
     return channel_names
