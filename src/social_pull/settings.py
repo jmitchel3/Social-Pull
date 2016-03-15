@@ -43,6 +43,9 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+
+    # Local apps
+    'profiles',
 ]
 
 SITE_ID = 1
