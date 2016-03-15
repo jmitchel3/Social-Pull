@@ -17,6 +17,8 @@ class GetYoutubeSubscriptionsTest(TestCase):
         }
         self.dummy_content_json = json.dumps(self.dummy_content_dict)
 
+        self.dummy_error_json = json.dumps({'error': {'errors': ['Error #1', 'Error #2']}})
+
     @mock.patch('profiles.utils.requests')
     def test_successful_fetching_of_subscriptions(self, requests):
         """
@@ -35,13 +37,16 @@ class GetYoutubeSubscriptionsTest(TestCase):
         self.assertEqual(expected_number_of_channels, len(result))
         self.assertEqual(expected_channel_names, result)
 
-    def test_invalid_token_used(self):
+    @mock.patch('profiles.utils.requests')
+    def test_invalid_token_used(self, requests):
         """
         Using an invalid token should return an empty list.
         """
         dummy_response = mock.MagicMock()
         dummy_response.status_code = 400
+        dummy_response.content = self.dummy_error_json
         dummy_invalid_token = 'token'
+        requests.get.return_value = dummy_response
 
         result = get_youtube_subscriptions(dummy_invalid_token)
 
