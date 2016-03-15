@@ -37,10 +37,13 @@ class GetYoutubeSubscriptionsTest(TestCase):
         self.assertEqual(expected_number_of_channels, len(result))
         self.assertEqual(expected_channel_names, result)
 
+    @mock.patch('profiles.utils.pprint')
     @mock.patch('profiles.utils.requests')
-    def test_invalid_token_used(self, requests):
+    def test_invalid_token_used(self, requests, pprint):
         """
         Using an invalid token should return an empty list.
+
+        It should also print the response using pprint module.
         """
         dummy_response = mock.MagicMock()
         dummy_response.status_code = 400
@@ -52,3 +55,4 @@ class GetYoutubeSubscriptionsTest(TestCase):
 
         expected_channel_names = []
         self.assertEqual(result, expected_channel_names)
+        self.assertTrue(pprint.called)
